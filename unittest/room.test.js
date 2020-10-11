@@ -1,17 +1,15 @@
 "use strict";
 
 const {
-    assert,
-    spy,
+    assert,    
     stub,
-    mock,
-    createSandbox
+    mock,    
 } = require("sinon");
 
 const services = require("../services/room");
 const controller = require("../controller/room");
 
-// Sample user data
+// Sample data
 const room = { RoomName:'Phong 1', ParentRoom: 'Phong Giam Doc' };
 
 /**

@@ -10,6 +10,7 @@ function getRooms(res) {
     }
     catch(e) {
         console.log(e);
+        throw e;
     }
 }
 module.exports.getRooms = getRooms;
@@ -21,12 +22,13 @@ function insertRooms(res, roomName, parentId) {
         var params = [
             { name: 'roomName', sqltype: sql.NVarChar, value: roomName},
             { name: 'parentId', sqltype: sql.BigInt,  value: parentId},
-            ];
+        ];
         const rs = server.executeQuery(query, res, params);
-        return rs;
+        return true;
     }
     catch(e) {
         console.log(e);
+        throw e;
     }
 }
 module.exports.insertRooms = insertRooms;
