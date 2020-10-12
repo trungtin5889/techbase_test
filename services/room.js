@@ -1,11 +1,17 @@
 const server = require('../server')
-var sql = require("mssql");
+const sql = require("mssql");
 
-function getRooms(res) {
+function getRooms(res, roomName) {
     try {
-        const query = `select r.RoomName, (select p.RoomName from Room p where p.Id=r.ParentId) as ParentRoom 
-                    from Room r`;
-        const rs = server.executeQuery(query, res, null);
+        let query = `select r.RoomName, (select p.RoomName from Room p where p.Id=r.ParentId) as ParentRoom 
+                    from Room r where 1=1 `;
+        if (roomName) {
+            query += `and r.RoomName like '%@roomName%'`
+        }
+        var params = [
+            { name: 'roomName', sqltype: sql.NVarChar, value: roomName }           
+        ];
+        const rs = server.executeQuery(query, res, params);
         return rs;
     }
     catch(e) {

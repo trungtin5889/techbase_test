@@ -1,7 +1,8 @@
 var room = require('../services/room')
 
 module.exports.getRooms = function (req, res) {
-    const rs = room.getRooms(res);
+    const roomName = req.query.RoomName;
+    const rs = room.getRooms(res, roomName);
     if (rs.length == 0) {
         return res.status(400).json({ message: 'Result is null' });
     }
