@@ -7,9 +7,12 @@ const router = express.Router()
 
 const { catchErrors } = require('../handlers/errorHandlers')
 
-const { getRoom } = require('../controller/room')
+const room = require('../controller/room')
+const customer = require('../controller/customer')
 
 // Imprint route
-router.get('/room', catchErrors(getRoom))
+router.get('/room', catchErrors(room.getRooms))
+router.post('/room', catchErrors(room.insertRooms))
+router.get('/customer', catchErrors(customer.getCustomers))
 
 module.exports = router
